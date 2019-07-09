@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="clickedLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZo-hM-ThA"/>
-                                    <segue destination="QlE-iO-qkb" kind="show" identifier="loginSegue" id="GIX-h3-wRO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibw-JM-Qw1">
@@ -62,11 +61,12 @@
                     <connections>
                         <outlet property="passwordField" destination="1Xs-YX-QTe" id="PDn-ik-0gQ"/>
                         <outlet property="usernameField" destination="OZC-Bv-ewy" id="JJ9-NK-sXN"/>
+                        <segue destination="QlE-iO-qkb" kind="show" identifier="loginSegue" id="Gid-Jc-vkt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="86.956521739130437" y="33.482142857142854"/>
+            <point key="canvasLocation" x="88" y="33"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="0dc-Al-CE1">
@@ -104,7 +104,6 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="clickedRegister:" destination="RF1-pV-3im" eventType="touchUpInside" id="HVN-SO-yv1"/>
-                                    <segue destination="QlE-iO-qkb" kind="show" identifier="registerSegue" id="HLv-IE-bRG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v19-7B-8QK">
@@ -124,6 +123,7 @@
                         <outlet property="emailField" destination="Zi6-1I-Xa9" id="cYF-kE-MDM"/>
                         <outlet property="passwordField" destination="8kg-g2-wYP" id="d0N-iS-pnl"/>
                         <outlet property="usernameField" destination="4Be-PE-tgV" id="4yy-L6-r6u"/>
+                        <segue destination="QlE-iO-qkb" kind="show" identifier="registerSegue" id="gGK-0X-aiP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XBm-v3-qLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -140,7 +140,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KCL-gb-G9z"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5AJ-iy-sWb"/>
+                    <navigationItem key="navigationItem" id="5AJ-iy-sWb">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="IAs-Gi-rba">
+                            <connections>
+                                <action selector="clickedLogout:" destination="tnm-f2-TPh" id="oUC-Du-B9L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfa-fI-AFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -149,7 +155,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KjL-YC-iwG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QlE-iO-qkb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AuthenticatedViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QlE-iO-qkb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AdV-Vt-mfD">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -169,6 +175,6 @@
         <image name="Icon-60" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GIX-h3-wRO"/>
+        <segue reference="gGK-0X-aiP"/>
     </inferredMetricsTieBreakers>
 </document>

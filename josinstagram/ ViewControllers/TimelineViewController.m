@@ -7,6 +7,9 @@
 //
 
 #import "TimelineViewController.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "Parse/Parse.h"
 
 @interface TimelineViewController ()
 
@@ -17,6 +20,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)clickedLogout:(id)sender {
+    
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        [self presentViewController:loginViewController animated:NO completion:nil];
+    }];
+    
+    NSLog(@"Logged-out successfully");
+    
 }
 
 /*
