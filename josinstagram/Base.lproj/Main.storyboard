@@ -43,6 +43,7 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="clickedLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZo-hM-ThA"/>
+                                    <segue destination="QlE-iO-qkb" kind="show" identifier="loginSegue" id="GIX-h3-wRO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibw-JM-Qw1">
@@ -103,6 +104,7 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="clickedRegister:" destination="RF1-pV-3im" eventType="touchUpInside" id="HVN-SO-yv1"/>
+                                    <segue destination="QlE-iO-qkb" kind="show" identifier="registerSegue" id="HLv-IE-bRG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v19-7B-8QK">
@@ -138,13 +140,35 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KCL-gb-G9z"/>
                     </view>
+                    <navigationItem key="navigationItem" id="5AJ-iy-sWb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfa-fI-AFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479" y="900"/>
+            <point key="canvasLocation" x="1388.4057971014495" y="900"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KjL-YC-iwG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QlE-iO-qkb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AdV-Vt-mfD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tnm-f2-TPh" kind="relationship" relationship="rootViewController" id="xWe-3I-csm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfL-Db-xG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="478.26086956521743" y="900"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon-60" width="60" height="60"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GIX-h3-wRO"/>
+    </inferredMetricsTieBreakers>
 </document>
