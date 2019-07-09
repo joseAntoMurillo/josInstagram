@@ -3,19 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		21F405DDCA00B5159811370A /* Pods_josinstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A23A584762273F60A995206 /* Pods_josinstagramTests.framework */; };
 		3C6A9D8022D3FB6A00749C1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9D7F22D3FB6A00749C1B /* AppDelegate.m */; };
-		3C6A9D8322D3FB6A00749C1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9D8222D3FB6A00749C1B /* ViewController.m */; };
 		3C6A9D8622D3FB6A00749C1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C6A9D8422D3FB6A00749C1B /* Main.storyboard */; };
 		3C6A9D8822D3FB6B00749C1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C6A9D8722D3FB6B00749C1B /* Assets.xcassets */; };
 		3C6A9D8B22D3FB6B00749C1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C6A9D8922D3FB6B00749C1B /* LaunchScreen.storyboard */; };
 		3C6A9D8E22D3FB6B00749C1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9D8D22D3FB6B00749C1B /* main.m */; };
 		3C6A9D9822D3FB6B00749C1B /* josinstagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9D9722D3FB6B00749C1B /* josinstagramTests.m */; };
 		3C6A9DA322D3FB6B00749C1B /* josinstagramUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9DA222D3FB6B00749C1B /* josinstagramUITests.m */; };
+		3C6A9DB322D4068F00749C1B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9DB222D4068F00749C1B /* LoginViewController.m */; };
+		3C6A9DB922D40D9D00749C1B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9DB822D40D9D00749C1B /* RegisterViewController.m */; };
+		3C6A9DBC22D4121B00749C1B /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6A9DBB22D4121B00749C1B /* TimelineViewController.m */; };
 		4E3CC8F0E02148CF85314BC7 /* Pods_josinstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80634EAC7AAF478BC7FA3C43 /* Pods_josinstagramUITests.framework */; };
 		56420701BF2E6A9A5339E8B1 /* Pods_josinstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0411020D22FDDCA0676FB11F /* Pods_josinstagram.framework */; };
 /* End PBXBuildFile section */
@@ -44,8 +46,6 @@
 		3C6A9D7B22D3FB6A00749C1B /* josinstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = josinstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C6A9D7E22D3FB6A00749C1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C6A9D7F22D3FB6A00749C1B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C6A9D8122D3FB6A00749C1B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3C6A9D8222D3FB6A00749C1B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3C6A9D8522D3FB6A00749C1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C6A9D8722D3FB6B00749C1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C6A9D8A22D3FB6B00749C1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +57,12 @@
 		3C6A9D9E22D3FB6B00749C1B /* josinstagramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = josinstagramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C6A9DA222D3FB6B00749C1B /* josinstagramUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = josinstagramUITests.m; sourceTree = "<group>"; };
 		3C6A9DA422D3FB6B00749C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C6A9DB122D4068F00749C1B /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3C6A9DB222D4068F00749C1B /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3C6A9DB722D40D9D00749C1B /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		3C6A9DB822D40D9D00749C1B /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		3C6A9DBA22D4121B00749C1B /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		3C6A9DBB22D4121B00749C1B /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		684B77C628F4465095D4362E /* Pods-josinstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-josinstagram.release.xcconfig"; path = "Target Support Files/Pods-josinstagram/Pods-josinstagram.release.xcconfig"; sourceTree = "<group>"; };
 		80634EAC7AAF478BC7FA3C43 /* Pods_josinstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_josinstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8171D9AE02FB1FBD41FA1EA5 /* Pods-josinstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-josinstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-josinstagramTests/Pods-josinstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,10 +124,9 @@
 		3C6A9D7D22D3FB6A00749C1B /* josinstagram */ = {
 			isa = PBXGroup;
 			children = (
+				3C6A9DB022D4065900749C1B /*  ViewControllers */,
 				3C6A9D7E22D3FB6A00749C1B /* AppDelegate.h */,
 				3C6A9D7F22D3FB6A00749C1B /* AppDelegate.m */,
-				3C6A9D8122D3FB6A00749C1B /* ViewController.h */,
-				3C6A9D8222D3FB6A00749C1B /* ViewController.m */,
 				3C6A9D8422D3FB6A00749C1B /* Main.storyboard */,
 				3C6A9D8722D3FB6B00749C1B /* Assets.xcassets */,
 				3C6A9D8922D3FB6B00749C1B /* LaunchScreen.storyboard */,
@@ -149,6 +154,19 @@
 			path = josinstagramUITests;
 			sourceTree = "<group>";
 		};
+		3C6A9DB022D4065900749C1B /*  ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3C6A9DB122D4068F00749C1B /* LoginViewController.h */,
+				3C6A9DB222D4068F00749C1B /* LoginViewController.m */,
+				3C6A9DB722D40D9D00749C1B /* RegisterViewController.h */,
+				3C6A9DB822D40D9D00749C1B /* RegisterViewController.m */,
+				3C6A9DBA22D4121B00749C1B /* TimelineViewController.h */,
+				3C6A9DBB22D4121B00749C1B /* TimelineViewController.m */,
+			);
+			path = " ViewControllers";
+			sourceTree = "<group>";
+		};
 		476CA1EF63D13550C932C2B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +177,6 @@
 				AC93CCF6D679C4A8A5720D37 /* Pods-josinstagramUITests.debug.xcconfig */,
 				D0B58F0B1A9763ECAEA84AFC /* Pods-josinstagramUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -393,9 +410,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6A9D8322D3FB6A00749C1B /* ViewController.m in Sources */,
+				3C6A9DB922D40D9D00749C1B /* RegisterViewController.m in Sources */,
 				3C6A9D8E22D3FB6B00749C1B /* main.m in Sources */,
 				3C6A9D8022D3FB6A00749C1B /* AppDelegate.m in Sources */,
+				3C6A9DB322D4068F00749C1B /* LoginViewController.m in Sources */,
+				3C6A9DBC22D4121B00749C1B /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

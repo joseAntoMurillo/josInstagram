@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TimelineViewController.h
 //  josinstagram
 //
 //  Created by josemurillo on 7/8/19.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface TimelineViewController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
