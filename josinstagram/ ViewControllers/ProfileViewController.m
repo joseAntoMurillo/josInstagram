@@ -10,12 +10,14 @@
 #import "PostCollectionCell.h"
 #import "Post.h"
 #import "Parse/Parse.h"
+#import "DetailsViewController.h"
 
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *userPostsArray;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -29,6 +31,11 @@
     
     [self fetchPosts];
     [self setCollectionLayout];
+    
+    self.collectionView.alwaysBounceVertical = YES;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents: UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)setCollectionLayout {
@@ -68,18 +75,28 @@
         else {
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
-/*
-#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    UICollectionViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+    Post *post = self.userPostsArray[indexPath.row];
+    
+    // Get the new view controller using [segue destinationViewController].
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    
+    // Pass the selected object to the new view controller
+    detailsViewController.post = post;
+
 }
-*/
+
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     

@@ -9,11 +9,15 @@
 #import "CameraViewController.h"
 #import "Post.h"
 #import "Parse/Parse.h"
+#import "TimelineViewController.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *instaImage;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
+@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *postPhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -26,6 +30,17 @@
     self.captionField.textColor = [UIColor lightGrayColor];
     [self.captionField setFont:[UIFont systemFontOfSize:18]];
     self.captionField.delegate = self;
+    
+    [self hideElements:YES];
+}
+
+// This method will be used to hide elements that are unecessary when user has not chosen a picture and hide the "take picture" button after the user has used it.
+- (void)hideElements:(BOOL)hide {
+    [self.captionField setHidden:hide];
+    [self.instaImage setHidden:hide];
+    [self.takePhotoButton setHidden:!hide];
+    [self.postPhotoButton setHidden:hide];
+    [self.cancelButton setHidden:hide];
 }
 
 - (IBAction)takePhoto:(id)sender {
@@ -58,6 +73,8 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    [self hideElements:NO];
+    
 }
 
 - (IBAction)postImage:(id)sender {
@@ -65,7 +82,9 @@
     UIImage *imageToPost = [self resizeImage:self.instaImage.image withSize:CGSizeMake(400, 400)];
     
     [Post postUserImage:imageToPost withCaption:self.captionField.text withCompletion:nil];
-    
+    [self hideElements:YES];
+    [self performSegueWithIdentifier:@"TookPhotoSegue" sender:nil];
+
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
@@ -85,6 +104,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
 }
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
@@ -112,5 +132,8 @@
     }
 }
 
+- (IBAction)clickCancelPost:(id)sender {
+    [self hideElements:YES];
+}
 
 @end

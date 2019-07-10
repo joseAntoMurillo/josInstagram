@@ -188,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfa-fI-AFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1669.5652173913045" y="2495.7589285714284"/>
+            <point key="canvasLocation" x="161" y="2648"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="gOD-an-EKD">
@@ -228,9 +228,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uki-GP-LMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2828.985507246377" y="2498.4375"/>
+            <point key="canvasLocation" x="2922" y="3463"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="fpw-UY-cM2">
             <objects>
                 <viewController id="ngf-my-JdG" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -239,7 +239,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZVU-fZ-nYH">
-                                <rect key="frame" x="0.0" y="302" width="414" height="594"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p8k-nN-QKw">
@@ -264,6 +264,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="postImage" destination="wlN-j9-TVo" id="Hkd-Ad-FAV"/>
+                                            <segue destination="J2Z-aX-CwS" kind="show" id="uqn-gQ-LGQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -272,7 +273,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Aft-iA-fda"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rWX-0f-ahC"/>
+                    <navigationItem key="navigationItem" title="Profile" id="rWX-0f-ahC"/>
                     <connections>
                         <outlet property="collectionView" destination="ZVU-fZ-nYH" id="VNS-9j-AIR"/>
                     </connections>
@@ -306,7 +307,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nH8-3l-ibv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nH8-3l-ibv">
                                 <rect key="frame" x="60" y="159" width="296" height="296"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -320,7 +321,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PC-uc-6B8">
-                                <rect key="frame" x="139" y="591" width="137" height="47"/>
+                                <rect key="frame" x="139" y="408" width="137" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <state key="normal" title="Take Photo"/>
@@ -335,14 +336,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSv-Vx-Lf3">
+                                <rect key="frame" x="158" y="700" width="109" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Cancel Post"/>
+                                <connections>
+                                    <action selector="clickCancelPost:" destination="9Ny-dQ-65j" eventType="touchUpInside" id="Wd1-eL-hnA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="W6P-yX-YLH"/>
                     </view>
                     <navigationItem key="navigationItem" id="TEM-Ea-iN7"/>
                     <connections>
+                        <outlet property="cancelButton" destination="iSv-Vx-Lf3" id="LIa-W0-cSu"/>
                         <outlet property="captionField" destination="KNA-Hs-qaz" id="DSK-2O-LQi"/>
                         <outlet property="instaImage" destination="nH8-3l-ibv" id="Afh-ac-Rf3"/>
+                        <outlet property="postPhotoButton" destination="eFe-JW-lZY" id="Pte-DX-gYs"/>
+                        <outlet property="takePhotoButton" destination="7PC-uc-6B8" id="hS3-KS-Ppu"/>
+                        <segue destination="tnm-f2-TPh" kind="show" identifier="TookPhotoSegue" id="cpT-2B-nZs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cot-Bh-aMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -416,5 +430,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Gid-Jc-vkt"/>
+        <segue reference="aKY-bj-1eY"/>
+        <segue reference="cpT-2B-nZs"/>
     </inferredMetricsTieBreakers>
 </document>
