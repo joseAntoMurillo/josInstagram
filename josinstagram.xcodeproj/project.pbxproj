@@ -22,6 +22,8 @@
 		3CE9239E22D5404100064F43 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9239D22D5404100064F43 /* Post.m */; };
 		3CE923A222D5539D00064F43 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE923A122D5539D00064F43 /* PostCell.m */; };
 		3CE923A522D5608C00064F43 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE923A422D5608C00064F43 /* DetailsViewController.m */; };
+		3CE923A822D6574F00064F43 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE923A722D6574F00064F43 /* ProfileViewController.m */; };
+		3CE923AB22D6586F00064F43 /* PostCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE923AA22D6586F00064F43 /* PostCollectionCell.m */; };
 		4E3CC8F0E02148CF85314BC7 /* Pods_josinstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80634EAC7AAF478BC7FA3C43 /* Pods_josinstagramUITests.framework */; };
 		56420701BF2E6A9A5339E8B1 /* Pods_josinstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0411020D22FDDCA0676FB11F /* Pods_josinstagram.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +77,10 @@
 		3CE923A122D5539D00064F43 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		3CE923A322D5608C00064F43 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		3CE923A422D5608C00064F43 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		3CE923A622D6574F00064F43 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		3CE923A722D6574F00064F43 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		3CE923A922D6586F00064F43 /* PostCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCollectionCell.h; sourceTree = "<group>"; };
+		3CE923AA22D6586F00064F43 /* PostCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCollectionCell.m; sourceTree = "<group>"; };
 		684B77C628F4465095D4362E /* Pods-josinstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-josinstagram.release.xcconfig"; path = "Target Support Files/Pods-josinstagram/Pods-josinstagram.release.xcconfig"; sourceTree = "<group>"; };
 		80634EAC7AAF478BC7FA3C43 /* Pods_josinstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_josinstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8171D9AE02FB1FBD41FA1EA5 /* Pods-josinstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-josinstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-josinstagramTests/Pods-josinstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +187,8 @@
 				3CE9239822D5382100064F43 /* CameraViewController.m */,
 				3CE923A322D5608C00064F43 /* DetailsViewController.h */,
 				3CE923A422D5608C00064F43 /* DetailsViewController.m */,
+				3CE923A622D6574F00064F43 /* ProfileViewController.h */,
+				3CE923A722D6574F00064F43 /* ProfileViewController.m */,
 			);
 			path = " ViewControllers";
 			sourceTree = "<group>";
@@ -199,6 +207,8 @@
 			children = (
 				3CE923A022D5539D00064F43 /* PostCell.h */,
 				3CE923A122D5539D00064F43 /* PostCell.m */,
+				3CE923A922D6586F00064F43 /* PostCollectionCell.h */,
+				3CE923AA22D6586F00064F43 /* PostCollectionCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -448,8 +458,10 @@
 			files = (
 				3C6A9DB922D40D9D00749C1B /* RegisterViewController.m in Sources */,
 				3C6A9D8E22D3FB6B00749C1B /* main.m in Sources */,
+				3CE923AB22D6586F00064F43 /* PostCollectionCell.m in Sources */,
 				3C6A9D8022D3FB6A00749C1B /* AppDelegate.m in Sources */,
 				3CE923A222D5539D00064F43 /* PostCell.m in Sources */,
+				3CE923A822D6574F00064F43 /* ProfileViewController.m in Sources */,
 				3CE9239922D5382100064F43 /* CameraViewController.m in Sources */,
 				3C6A9DB322D4068F00749C1B /* LoginViewController.m in Sources */,
 				3CE923A522D5608C00064F43 /* DetailsViewController.m in Sources */,
