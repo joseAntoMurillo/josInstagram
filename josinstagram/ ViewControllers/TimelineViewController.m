@@ -12,11 +12,13 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 #import "PostCell.h"
+#import "DetailsViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postsArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -30,6 +32,10 @@
     self.tableView.delegate = self;
     
     [self fetchPosts];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents: UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)fetchPosts {
@@ -49,6 +55,7 @@
         else {
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -76,6 +83,12 @@
     cell.post = post;
     [cell refreshData];
     
+    // Sets custom background color when selecting a cell
+    UIColor *backColor = [UIColor colorWithRed:0.85 green:0.83 blue:0.83 alpha:1.0];
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = backColor;
+    cell.selectedBackgroundView = backgroundView;
+    
     return cell;
     
 }
@@ -85,14 +98,26 @@
     return self.postsArray.count;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
+// Uses animation to deselect cell after selecting it
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     
+     // Gets appropiate data corresponding to the tweet that the user selected
+     UITableViewCell *tappedCell = sender;
+     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+     Post *post = self.postsArray[indexPath.row];
+     
+     // Get the new view controller using [segue destinationViewController].
+     DetailsViewController *detailsView = [segue destinationViewController];
+     
+     // Pass the selected object to the new view controller
+     detailsView.post = post;
+
  }
- */
+
 
 @end
