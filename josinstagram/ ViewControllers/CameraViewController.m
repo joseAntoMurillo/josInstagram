@@ -101,12 +101,6 @@
     return newImage;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-}
-
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
     self.captionField.text = @"";
     self.captionField.textColor = [UIColor blackColor];
@@ -135,5 +129,34 @@
 - (IBAction)clickCancelPost:(id)sender {
     [self hideElements:YES];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    
+    __block Post *newPost = [[Post alloc] init];
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            newPost = [posts lastObject];
+        }
+        else {
+            NSLog(@"Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+    
+    //    // Show post in timeline
+    //    Post *newPost = [[Post alloc] init];
+    //    newPost.image = [Post getPFFileFromImage:imageToPost];
+    //    newPost.caption = self.captionField.text;
+    [self.delegate didPost:newPost];
+}
+
 
 @end

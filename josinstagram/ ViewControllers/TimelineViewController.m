@@ -13,8 +13,9 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "DetailsViewController.h"
+#import "CameraViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CameraControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postsArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -116,8 +117,11 @@
      
      // Pass the selected object to the new view controller
      detailsView.post = post;
-
  }
 
+- (void)didPost:(nonnull Post *)post {
+    [self.postsArray insertObject:post atIndex:0];
+    [self.tableView reloadData];
+}
 
 @end
