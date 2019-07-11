@@ -32,6 +32,50 @@
     }];
     
     self.postCaption.text = self.post.caption;
+    self.postDate.text = [self getDate];
+    
+    NSString *username = [@"@" stringByAppendingString: self.post.author.username];
+    self.postUser.text = username;
+}
+
+- (NSString *)getDate {
+    
+    NSDate *createdAt = [self.post createdAt];
+    NSDate *todayDate = [NSDate date];
+    double ti = [createdAt timeIntervalSinceDate:todayDate];
+    ti = ti * -1;
+    
+    if(ti < 1) {
+        return @"never";
+    } else  if (ti < 60) {
+        return @"less than a minute ago";
+    } else if (ti < 120) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%d minute ago", diff];
+    } else if (ti < 3600) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%d minutes ago", diff];
+    } else if (ti < 7200) {
+        int diff = round(ti / 60 / 60);
+        return [NSString stringWithFormat:@"%d hour ago", diff];
+    } else if (ti < 86400) {
+        int diff = round(ti / 60 / 60);
+        return [NSString stringWithFormat:@"%d hours ago", diff];
+    } else if (ti < 172800) {
+        int diff = round(ti / 60 / 60 / 24);
+        return [NSString stringWithFormat:@"%d days ago", diff];
+    } else if (ti < 2629743) {
+        int diff = round(ti / 60 / 60 / 24);
+        return [NSString stringWithFormat:@"%d days ago", diff];
+    } else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        // Convert Date to String
+        return [formatter stringFromDate:createdAt];
+    }
+    
 }
 
 @end
