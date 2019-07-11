@@ -33,9 +33,42 @@
     
     self.postCaption.text = self.post.caption;
     self.postDate.text = [self getDate];
-    
+    self.labelLikeCount.text = [NSString stringWithFormat:@"%li", self.post.usersThatLiked.count];
+                                
     NSString *username = [@"@" stringByAppendingString: self.post.author.username];
     self.postUser.text = username;
+    
+    [self.heartIcon setSelected:([self.post.usersThatLiked containsObject:[PFUser currentUser].username])];
+    [self.heartIcon setImage: [UIImage imageNamed:@"heartEmpty"]
+                    forState: UIControlStateNormal];
+    [self.heartIcon setImage: [UIImage imageNamed:@"heartFull"]
+                    forState: UIControlStateSelected];
+}
+
+- (IBAction)didTapLike:(id)sender {
+    BOOL didLike = ([self.post.usersThatLiked containsObject:[PFUser currentUser].username]);
+    
+    [self changeLikeCount:didLike];
+    [self refreshData];
+}
+
+- (void)changeLikeCount:(BOOL)liked {
+
+    NSNumber *likes = [NSNumber numberWithInt:0];
+    // Adds or deletes like if user has already liked the post
+    if (liked) {
+        [self.post removeObject:[PFUser currentUser].username forKey:@"usersThatLiked"];
+        
+    } else {
+        [self.post addObject:[PFUser currentUser].username forKey:@"usersThatLiked"];
+    }
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"An error ocurred while uploading image to server");
+        }
+    }];
+    // We don't update like count but rather rely on counting the array
+    likes = @(self.post.usersThatLiked.count);
 }
 
 - (NSString *)getDate {

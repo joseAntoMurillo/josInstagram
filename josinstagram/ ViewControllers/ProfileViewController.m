@@ -73,10 +73,10 @@
     [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (!data){
             return NSLog(@"%@", error);
-            
         }
         self.profileImage.image = [UIImage imageWithData:data];
     }];
+    // Set image surrounded by a circle
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2;
     self.profileName.text = [PFUser currentUser].username;
     
@@ -144,7 +144,7 @@
     
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];

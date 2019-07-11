@@ -179,15 +179,32 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYE-zd-44h">
-                                                    <rect key="frame" x="20" y="485" width="374" height="23.5"/>
+                                                    <rect key="frame" x="20" y="476" width="374" height="23.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5T-15-MMD">
+                                                    <rect key="frame" x="20" y="437" width="31" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <state key="normal" image="heartEmpty"/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="Jer-Hu-Sxy" eventType="touchUpInside" id="59E-Yf-azp"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vun-Yp-ApH">
+                                                    <rect key="frame" x="59" y="437" width="47" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="heartIcon" destination="h5T-15-MMD" id="82d-9C-DOh"/>
+                                            <outlet property="labelLikeCount" destination="vun-Yp-ApH" id="2Ng-m0-tX5"/>
                                             <outlet property="postCaption" destination="JYE-zd-44h" id="vI0-H2-eRc"/>
                                             <outlet property="postDate" destination="c1R-lG-7EL" id="mEm-U9-Fgt"/>
                                             <outlet property="postImage" destination="Th8-V2-IMT" id="Am4-Fa-dap"/>
@@ -320,7 +337,7 @@
                                     <action selector="changeImage:" destination="ngf-my-JdG" eventType="touchUpInside" id="cgT-Km-BCx"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcJ-uh-k2R">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profilePic" translatesAutoresizingMaskIntoConstraints="NO" id="BcJ-uh-k2R">
                                 <rect key="frame" x="19" y="108" width="119" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -531,14 +548,16 @@
     </scenes>
     <resources>
         <image name="feed_tab" width="25" height="25"/>
+        <image name="heartEmpty" width="690" height="626"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="instagramBackground" width="1280" height="768"/>
         <image name="instagramFont" width="800" height="286"/>
+        <image name="profilePic" width="331" height="323"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Gid-Jc-vkt"/>
-        <segue reference="uqn-gQ-LGQ"/>
-        <segue reference="xWe-3I-csm"/>
+        <segue reference="aKY-bj-1eY"/>
+        <segue reference="cpT-2B-nZs"/>
     </inferredMetricsTieBreakers>
 </document>

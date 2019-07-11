@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "Parse/Parse.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface RegisterViewController ()
 
@@ -54,6 +55,18 @@
             } else {
                 NSLog(@"User registered successfully");
                 [self performSegueWithIdentifier:@"registerSegue" sender:nil];
+                
+                // Sets a default profile image
+                // UIImage *defaultProfileImage = [self resizeImage:[UIImage imageNamed:@"profilePic"] withSize:CGSizeMake(400, 400)];
+                NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"profilePic"], 1);
+                PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"DefaultImage.png" data: imageData];
+                PFUser *user = [PFUser currentUser];
+                [user setObject:imageFile forKey:@"profileImage"];
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        NSLog(@"An error ocurred while uploading image to server");
+                    }
+                }];
             }
         }];
         

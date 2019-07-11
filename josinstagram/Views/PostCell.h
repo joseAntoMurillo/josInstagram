@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *postCaption;
 @property (weak, nonatomic) IBOutlet UILabel *postDate;
 @property (weak, nonatomic) IBOutlet UILabel *postUser;
+@property (weak, nonatomic) IBOutlet UIButton *heartIcon;
+@property (weak, nonatomic) IBOutlet UILabel *labelLikeCount;
 
 @property (strong, nonatomic) Post *post;
 

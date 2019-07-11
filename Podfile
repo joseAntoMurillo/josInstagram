@@ -7,6 +7,7 @@ target 'josinstagram' do
 
   # Pods for josinstagram
     pod 'Parse'
+    pod 'AFNetworking'
 
   target 'josinstagramTests' do
     inherit! :search_paths
