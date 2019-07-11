@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSMutableArray *userPostsArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *profileName;
+@property (weak, nonatomic) IBOutlet UILabel *postsCount;
 
 @end
 
@@ -31,6 +33,7 @@
     self.collectionView.delegate = self;
     
     [self fetchPosts];
+    [self fetchProfile];
     [self setCollectionLayout];
     // self.profileImage.image
     
@@ -53,6 +56,7 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.userPostsArray = (NSMutableArray *)posts;
+            self.postsCount.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.userPostsArray.count];
             [self.collectionView reloadData];
         }
         else {
@@ -60,6 +64,22 @@
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (void)fetchProfile {
+    
+    PFUser *user = [PFUser currentUser]; // from Parse API
+    PFFileObject *image = [user objectForKey:@"profileImage"];
+    [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!data){
+            return NSLog(@"%@", error);
+            
+        }
+        self.profileImage.image = [UIImage imageWithData:data];
+    }];
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2;
+    self.profileName.text = [PFUser currentUser].username;
+    
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -128,11 +148,21 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *imageToPost = [self resizeImage:originalImage withSize:CGSizeMake(400, 400)];
     
     self.profileImage.image = originalImage;
     
-    UIImage *imageToPost = [self resizeImage:originalImage withSize:CGSizeMake(400, 400)];
-    // PFUser.currentUser.profileImage = imageToPost;
+    NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1);
+    PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"image.png" data: imageData];
+    // [imageFile saveInBackground];
+    
+    PFUser *user = [PFUser currentUser];
+    [user setObject:imageFile forKey:@"profileImage"];
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            NSLog(@"An error ocurred while uploading image to server");
+        }
+    }];
 
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];

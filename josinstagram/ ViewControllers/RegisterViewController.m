@@ -33,17 +33,48 @@
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
     
-    // call sign up function on the object
-    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else {
-            NSLog(@"User registered successfully");
-            [self performSegueWithIdentifier:@"registerSegue" sender:nil];
+    if (![newUser.username  isEqual: @""] && ![newUser.password  isEqual: @""]  && ![newUser.email  isEqual: @""] ) {
+        // call sign up function on the object
+        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (error != nil) {
+                NSLog(@"Error: %@", error.localizedDescription);
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Error" message:@"Cannot create this account." preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                // create a try again action
+                UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+                    // function calls itself to try again!
+                }];
+                
+                // add the cancel action to the alertController
+                [alert addAction:tryAgainAction];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+            } else {
+                NSLog(@"User registered successfully");
+                [self performSegueWithIdentifier:@"registerSegue" sender:nil];
+            }
+        }];
+        
+    }
+    // if the text fields are empty, give an error and let user try again
+    else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Error" message:@"Make sure fields are not empty!" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        // create a try again action
+        UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+            // function calls itself to try again!
+        }];
+        
+        // add the cancel action to the alertController
+        [alert addAction:tryAgainAction];
+        
+        [self presentViewController:alert animated:YES completion:^{
             
-            // manually segue to logged in view
-        }
-    }];
+        }];
+    }
+    
 }
 
 - (IBAction)clickedBackLogin:(id)sender {

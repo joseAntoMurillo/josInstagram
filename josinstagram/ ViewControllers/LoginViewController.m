@@ -31,6 +31,20 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"Something went wrong." preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            // create a try again action
+            UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+                // function calls itself to try again!
+            }];
+            
+            // add the cancel action to the alertController
+            [alert addAction:tryAgainAction];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
         } else {
             NSLog(@"User logged in successfully");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
@@ -38,7 +52,6 @@
             // display view controller that needs to shown after successful login
         }
     }];
-    
 }
 
 
