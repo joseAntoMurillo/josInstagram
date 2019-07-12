@@ -64,7 +64,6 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     
     self.instaImage.image = originalImage;
     
@@ -82,7 +81,10 @@
     UIImage *imageToPost = [self resizeImage:self.instaImage.image withSize:CGSizeMake(400, 400)];
     
     [Post postUserImage:imageToPost withCaption:self.captionField.text withCompletion:nil];
+    
+    
     [self hideElements:YES];
+
     [self performSegueWithIdentifier:@"TookPhotoSegue" sender:nil];
 
 }
@@ -130,33 +132,11 @@
     [self hideElements:YES];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    // construct PFQuery
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
-    
-    __block Post *newPost = [[Post alloc] init];
-    // fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            newPost = [posts lastObject];
-        }
-        else {
-            NSLog(@"Error getting home timeline: %@", error.localizedDescription);
-        }
-    }];
-    
-    //    // Show post in timeline
-    //    Post *newPost = [[Post alloc] init];
-    //    newPost.image = [Post getPFFileFromImage:imageToPost];
-    //    newPost.caption = self.captionField.text;
-    [self.delegate didPost:newPost];
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//
+//}
 
 
 @end

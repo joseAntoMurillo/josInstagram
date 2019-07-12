@@ -14,8 +14,9 @@
 #import "PostCell.h"
 #import "DetailsViewController.h"
 #import "CameraViewController.h"
+#import "FriendsProfileViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, CameraControllerDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postsArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -90,6 +91,7 @@
     backgroundView.backgroundColor = backColor;
     cell.selectedBackgroundView = backgroundView;
     
+    cell.delegate = self;
     return cell;
     
 }
@@ -104,24 +106,28 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)tapProfile:(nonnull PostCell *)postCell didTap:(nonnull PFUser *)user {
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     
-     // Gets appropiate data corresponding to the tweet that the user selected
-     UITableViewCell *tappedCell = sender;
-     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-     Post *post = self.postsArray[indexPath.row];
-     
-     // Get the new view controller using [segue destinationViewController].
-     DetailsViewController *detailsView = [segue destinationViewController];
-     
-     // Pass the selected object to the new view controller
-     detailsView.post = post;
- }
-
-- (void)didPost:(nonnull Post *)post {
-    [self.postsArray insertObject:post atIndex:0];
-    [self.tableView reloadData];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"DetailsSegue"]) {
+        // Gets appropiate data corresponding to the tweet that the user selected
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        
+        // Get the new view controller using [segue destinationViewController].
+        DetailsViewController *detailsView = [segue destinationViewController];
+        
+        // Pass the selected object to the new view controller
+        detailsView.post = post;
+        
+    } else {
+        FriendsProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.userFriend = sender;
+    }
 }
 
 @end

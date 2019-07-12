@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostCellDelegate;
+
 @interface PostCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
@@ -19,10 +21,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *postUser;
 @property (weak, nonatomic) IBOutlet UIButton *heartIcon;
 @property (weak, nonatomic) IBOutlet UILabel *labelLikeCount;
+@property (weak, nonatomic) IBOutlet UIImageView *postProfileImage;
 
 @property (strong, nonatomic) Post *post;
 
+@property (nonatomic, weak) id<PostCellDelegate> delegate;
+
 - (void)refreshData;
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender;
+
+@end
+
+@protocol PostCellDelegate
+
+- (void)tapProfile:(PostCell *)postCell didTap: (PFUser *)user;
 
 @end
 

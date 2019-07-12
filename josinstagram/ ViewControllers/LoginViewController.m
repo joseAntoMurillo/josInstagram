@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -23,8 +23,9 @@
     // Do any additional setup after loading the view.
 }
 
-
 - (IBAction)clickedLogin:(id)sender {
+    [self.usernameField setDelegate:self];
+    
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
@@ -54,6 +55,16 @@
     }];
 }
 
+
+
+- (IBAction)usernameEditFinished:(id)sender {
+    [sender resignFirstResponder];
+}
+
+// Dismiss keyboard after editting
+- (IBAction)passwordEditFinished:(id)sender {
+    [sender resignFirstResponder];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

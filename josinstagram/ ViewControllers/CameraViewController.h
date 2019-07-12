@@ -11,16 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol CameraControllerDelegate
-
-- (void)didPost:(Post *)post;
-
-@end
-
-
 @interface CameraViewController : UIViewController
-
-@property (nonatomic, weak) id <CameraControllerDelegate> delegate;
 
 @end
 

@@ -94,6 +94,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)emailFinishedEdit:(id)sender {
+    [sender resignFirstResponder];
+}
+- (IBAction)usernameFinishedEdit:(id)sender {
+    [sender resignFirstResponder];
+}
+- (IBAction)passwordFinishedEdit:(id)sender {
+    [sender resignFirstResponder];
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

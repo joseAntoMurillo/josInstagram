@@ -7,12 +7,17 @@
 //
 
 #import "PostCell.h"
+#import "Parse/Parse.h"
 
 @implementation PostCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.postProfileImage addGestureRecognizer:profileTapGestureRecognizer];
+    [self.postProfileImage setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,13 +36,26 @@
         self.postImage.image = [UIImage imageWithData:data];
     }];
     
+    // Gets information about the post
     self.postCaption.text = self.post.caption;
     self.postDate.text = [self getDate];
-    self.labelLikeCount.text = [NSString stringWithFormat:@"%li", self.post.usersThatLiked.count];
-                                
     NSString *username = [@"@" stringByAppendingString: self.post.author.username];
     self.postUser.text = username;
     
+    // Gets profile picture of the author
+    PFUser *user = self.post.author; // from Parse API
+    PFFileObject *image = [user objectForKey:@"profileImage"];
+    [image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!data){
+            return NSLog(@"%@", error);
+        }
+        self.postProfileImage.image = [UIImage imageWithData:data];
+    }];
+    // Surround image with a circle
+    self.postProfileImage.layer.cornerRadius = self.postProfileImage.frame.size.width/2;
+    
+    // Sets image and count for likes
+    self.labelLikeCount.text = [NSString stringWithFormat:@"%li", self.post.usersThatLiked.count];
     [self.heartIcon setSelected:([self.post.usersThatLiked containsObject:[PFUser currentUser].username])];
     [self.heartIcon setImage: [UIImage imageNamed:@"heartEmpty"]
                     forState: UIControlStateNormal];
@@ -69,6 +87,10 @@
     }];
     // We don't update like count but rather rely on counting the array
     likes = @(self.post.usersThatLiked.count);
+}
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate tapProfile:self didTap:self.post.author];
 }
 
 - (NSString *)getDate {
@@ -108,7 +130,11 @@
         // Convert Date to String
         return [formatter stringFromDate:createdAt];
     }
-    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 
 @end
