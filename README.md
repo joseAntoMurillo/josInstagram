@@ -36,11 +36,10 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [X ] List anything else that you can get done to improve the app functionality!
-- Added margins to collection view 
-- Hide elements when necessary in camera
-- Can look at details page from profile tab
-- Added AutoLayout to Timeline
+- Customized profile view
+- Hide unecessary elements when using the camera
 - Added alert errors if password is incorrect or fields are field badly
+- Can look at details page from profile tab
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
