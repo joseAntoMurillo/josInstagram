@@ -10,6 +10,7 @@
 #import "Post.h"
 #import "Parse/Parse.h"
 #import "TimelineViewController.h"
+#import "MBProgressHUD.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -79,14 +80,22 @@
 
 // Action called to add post to server and perform segue if user chooses to do so
 - (IBAction)postImage:(id)sender {
+    // After the user submits a new post, show a progress HUD while the post is being uploaded to Parse
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     // Gets appropiate data and calls function from Post.m file
     UIImage *imageToPost = [self resizeImage:self.instaImage.image withSize:CGSizeMake(400, 400)];
-    [Post postUserImage:imageToPost withCaption:self.captionField.text withCompletion:nil];
-    
-    // When user opens view controller next time, the view controller will only have the "take photo" button
-    [self hideElements:YES];
-
-    [self performSegueWithIdentifier:@"TookPhotoSegue" sender:nil];
+    [Post postUserImage:imageToPost withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            // NSLog(@"Not working");
+        } else {
+            // When user opens view controller next time, the view controller will only have the "take photo" button
+            [self hideElements:YES];
+            
+            [self performSegueWithIdentifier:@"TookPhotoSegue" sender:nil];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 // Resize image for it to fit server conditions
@@ -129,6 +138,10 @@
 // If user cancels the post, the view controller will only have the "take photo" button
 - (IBAction)clickCancelPost:(id)sender {
     [self hideElements:YES];
+}
+
+// Segue when user posts a picture
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 }
 
 
