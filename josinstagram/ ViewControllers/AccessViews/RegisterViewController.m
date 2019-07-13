@@ -25,6 +25,7 @@
     // Do any additional setup after loading the view.
 }
 
+// Action called when user tries to register
 - (IBAction)clickedRegister:(id)sender {
     // initialize a user object
     PFUser *newUser = [PFUser user];
@@ -34,9 +35,11 @@
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
     
+    // Check that fields are not empty
     if (![newUser.username  isEqual: @""] && ![newUser.password  isEqual: @""]  && ![newUser.email  isEqual: @""] ) {
-        // call sign up function on the object
+        // Input credentials are verified before allowing user to register and login
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            // Error and alert if credentials are wrong
             if (error != nil) {
                 NSLog(@"Error: %@", error.localizedDescription);
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Error" message:@"Cannot create this account." preferredStyle:(UIAlertControllerStyleAlert)];
@@ -56,7 +59,7 @@
                 NSLog(@"User registered successfully");
                 [self performSegueWithIdentifier:@"registerSegue" sender:nil];
                 
-                // Sets a default profile image
+                // Sets a default profile image for the user
                 // UIImage *defaultProfileImage = [self resizeImage:[UIImage imageNamed:@"profilePic"] withSize:CGSizeMake(400, 400)];
                 NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"profilePic"], 1);
                 PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"DefaultImage.png" data: imageData];
@@ -64,7 +67,7 @@
                 [user setObject:imageFile forKey:@"profileImage"];
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (!error) {
-                        NSLog(@"An error ocurred while uploading image to server");
+                       // NSLog(@"An error ocurred while uploading image to server");
                     }
                 }];
             }
@@ -90,10 +93,13 @@
     
 }
 
+
+// Back to login
 - (IBAction)clickedBackLogin:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// Dismiss keyboard when finishing editing
 - (IBAction)emailFinishedEdit:(id)sender {
     [sender resignFirstResponder];
 }
@@ -105,6 +111,7 @@
 }
 
 
+// Segue to timeline
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

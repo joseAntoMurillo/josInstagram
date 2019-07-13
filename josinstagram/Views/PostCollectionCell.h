@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PostCollectionCell : UICollectionViewCell
 
+// A cell in the collection view has an image
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
 
 @end

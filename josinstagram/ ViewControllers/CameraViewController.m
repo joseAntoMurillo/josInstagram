@@ -26,11 +26,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Sets delegates for protocols
     self.captionField.text = @"Write caption here";
     self.captionField.textColor = [UIColor lightGrayColor];
     [self.captionField setFont:[UIFont systemFontOfSize:18]];
     self.captionField.delegate = self;
     
+    // hides caption, image, and post button if user has not chosen to take a photo yet.
     [self hideElements:YES];
 }
 
@@ -43,6 +45,21 @@
     [self.cancelButton setHidden:hide];
 }
 
+// Gets image and sets it to global property when user finishes selecting/taking it
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    
+    self.instaImage.image = originalImage;
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self hideElements:NO];
+    
+}
+
+// Action called when user tries to take a photo - shows camera/library view controller
 - (IBAction)takePhoto:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -55,40 +72,24 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        // NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    
-    self.instaImage.image = originalImage;
-    
-    // Do something with the images (based on your use case)
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    [self hideElements:NO];
-    
-}
-
+// Action called to add post to server and perform segue if user chooses to do so
 - (IBAction)postImage:(id)sender {
-
+    // Gets appropiate data and calls function from Post.m file
     UIImage *imageToPost = [self resizeImage:self.instaImage.image withSize:CGSizeMake(400, 400)];
-    
     [Post postUserImage:imageToPost withCaption:self.captionField.text withCompletion:nil];
     
-    
+    // When user opens view controller next time, the view controller will only have the "take photo" button
     [self hideElements:YES];
 
     [self performSegueWithIdentifier:@"TookPhotoSegue" sender:nil];
-
 }
 
+// Resize image for it to fit server conditions
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -103,23 +104,20 @@
     return newImage;
 }
 
+// Sets placeholder in textView
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
     self.captionField.text = @"";
     self.captionField.textColor = [UIColor blackColor];
     return YES;
 }
-
 -(void) textViewDidChange:(UITextView *)textView {
-    
     if(self.captionField.text.length == 0) {
         self.captionField.textColor = [UIColor lightGrayColor];
         self.captionField.text = @"Write caption here";
         [self.captionField resignFirstResponder];
     }
 }
-
 -(void) textViewShouldEndEditing:(UITextView *)textView {
-    
     if(self.captionField.text.length == 0) {
         self.captionField.textColor = [UIColor lightGrayColor];
         self.captionField.text = @"Write caption here";
@@ -128,15 +126,10 @@
     }
 }
 
+// If user cancels the post, the view controller will only have the "take photo" button
 - (IBAction)clickCancelPost:(id)sender {
     [self hideElements:YES];
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//
-//}
 
 
 @end

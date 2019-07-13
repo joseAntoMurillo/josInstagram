@@ -13,32 +13,29 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     
-     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    // Sets gesture for tapping on freind's profile image, which will then redirect users to the respecrive friend's profile page
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
     [self.postProfileImage addGestureRecognizer:profileTapGestureRecognizer];
     [self.postProfileImage setUserInteractionEnabled:YES];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
+// Sets features of cell with data from server
 - (void)refreshData {
     
+    // Get the image of the post
     [self.post.image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!data) {
             return NSLog(@"%@", error);
         }
-        // Do something with the image
         self.postImage.image = [UIImage imageWithData:data];
     }];
     
     // Gets information about the post
     self.postCaption.text = self.post.caption;
     self.postDate.text = [self getDate];
+    
+    // Username with "@" at its begining
     NSString *username = [@"@" stringByAppendingString: self.post.author.username];
     self.postUser.text = username;
     
@@ -63,9 +60,11 @@
                     forState: UIControlStateSelected];
 }
 
+// Calls function if user likes post
 - (IBAction)didTapLike:(id)sender {
     BOOL didLike = ([self.post.usersThatLiked containsObject:[PFUser currentUser].username]);
     
+    // Updates like count and heart icon
     [self changeLikeCount:didLike];
     [self refreshData];
 }
@@ -73,6 +72,7 @@
 - (void)changeLikeCount:(BOOL)liked {
 
     NSNumber *likes = [NSNumber numberWithInt:0];
+    
     // Adds or deletes like if user has already liked the post
     if (liked) {
         [self.post removeObject:[PFUser currentUser].username forKey:@"usersThatLiked"];
@@ -89,12 +89,13 @@
     likes = @(self.post.usersThatLiked.count);
 }
 
+// Called when user taps on profile image of a friend
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
     [self.delegate tapProfile:self didTap:self.post.author];
 }
 
+// Changes date layout to say how much time ago a post was made
 - (NSString *)getDate {
-    
     NSDate *createdAt = [self.post createdAt];
     NSDate *todayDate = [NSDate date];
     double ti = [createdAt timeIntervalSinceDate:todayDate];
@@ -130,6 +131,10 @@
         // Convert Date to String
         return [formatter stringFromDate:createdAt];
     }
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

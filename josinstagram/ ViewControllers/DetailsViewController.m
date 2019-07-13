@@ -25,8 +25,8 @@
     [self refreshData];
 }
 
+// Uses data from segue to set date, caption, and image for a post
 - (void)refreshData {
-    
     [self.post.image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!data) {
             return NSLog(@"%@", error);
@@ -39,6 +39,7 @@
     self.postDate.text = [self getDate];
 }
 
+// Formats date to say how much time ago the post was made
 - (NSString *)getDate {
   
     NSDate *createdAt = [self.post createdAt];
@@ -78,15 +79,5 @@
     }
   
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

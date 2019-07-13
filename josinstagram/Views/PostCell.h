@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+// Sets protocol for tapping to see a friend's profile
 @protocol PostCellDelegate
 
 - (void)tapProfile:(PostCell *)postCell didTap: (PFUser *)user;

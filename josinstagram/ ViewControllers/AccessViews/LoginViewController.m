@@ -23,18 +23,20 @@
     // Do any additional setup after loading the view.
 }
 
+// Action triggered when user tries to login
 - (IBAction)clickedLogin:(id)sender {
     [self.usernameField setDelegate:self];
     
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
+    // Calls server to login user and verify creditials.
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"Something went wrong." preferredStyle:(UIAlertControllerStyleAlert)];
             
-            // create a try again action
+            // create a try again action, notifying the user that an error occured
             UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
                 // function calls itself to try again!
             }];
@@ -43,7 +45,6 @@
             [alert addAction:tryAgainAction];
             
             [self presentViewController:alert animated:YES completion:^{
-                
             }];
             
         } else {
@@ -55,17 +56,12 @@
     }];
 }
 
-
-
-- (IBAction)usernameEditFinished:(id)sender {
-    [sender resignFirstResponder];
-}
-
 // Dismiss keyboard after editting
 - (IBAction)passwordEditFinished:(id)sender {
     [sender resignFirstResponder];
 }
 
+// Segue to timeline
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

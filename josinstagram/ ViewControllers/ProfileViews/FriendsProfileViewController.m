@@ -25,9 +25,9 @@
 
 // I decided to make this file different from ProfileViewController so that if in the future new features are exclusively added to "your profile" or "your freinds' profiles" then they can be implemented in different files. However, I understand that the trade-off of doing this is that there is more reptitive code.
 
+// Considering the similarity between this file and ProfileViewController.m, most comments have been omitted in this file. For additional information please refer to ProfileViewController,m
 
 @implementation FriendsProfileViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +38,6 @@
     [self fetchPosts];
     [self fetchProfile];
     [self setCollectionLayout];
-    // self.profileImage.image
     
     self.collectionView.alwaysBounceVertical = YES;
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -46,8 +45,7 @@
     [self.collectionView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (void)fetchPosts {
-    
+- (void)fetchPosts {\
     // construct PFQuery
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
@@ -81,8 +79,8 @@
     // Set image surrounded by a circle
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2;
     self.profileName.text = [PFUser currentUser].username;
-    
 }
+
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
@@ -126,15 +124,5 @@
     layout.itemSize = CGSizeMake (itemWidth, itemHeight);
     
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
